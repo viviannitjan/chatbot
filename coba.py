@@ -1,6 +1,7 @@
 import re
 from sys import argv
 script, first = argv
+import json
 
 stopwords = ["is","an","the","on","of","was","in","for","does","do","'ve","a","or","to","and","any","are","been"]
 
@@ -54,13 +55,12 @@ def metode_regex(query):
             t[i] = pengganti
         i+=1
     hasil = ''.join(t)
-    print(hasil)
-
+    # print(hasil)
     #Cari di list pertanyaan ada ga
     for i in range(23):
         x = re.search(hasil, pertanyaan[i])
         if (x):
-            print(jawaban[i])
+            jsonpass = jawaban[i]
             break
-
-metode_regex(first)
+    return json.dumps(jsonpass)
+print (metode_regex(first))
