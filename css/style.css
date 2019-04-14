@@ -1,0 +1,45 @@
+.avatar {
+    position: relative;
+    top : 100px;
+    width: 75%;
+    margin: auto;
+}
+
+.avatar img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.Pertanyaan {
+    position: relative;
+    top : 150px;
+    width: 75%;
+    margin: auto;
+}
+
+.Pertanyaan #terima_pertanyaan {
+    display: block;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pilihan_metode {
+    position: relative;
+    width: 150px;
+    margin: auto;
+}
+
+.Jawaban {
+    position: relative;
+    top : 200px;
+    width: 55%;
+    margin: auto;
+}
+
+.Jawaban p {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
