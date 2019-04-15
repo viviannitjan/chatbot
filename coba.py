@@ -1,10 +1,12 @@
 import re
 import string
 from sys import argv
-# script, first = argv
+script, first = argv
 import json
 
-stopwords = ["is","an","the","on","of","was","in","for","does","do","'ve","a","or","to","and","any","are","been"]
+stopwords = ["is","an","the","on","of","was","in","for","does","do","'ve",
+"a","or","to","and","any","are","been","untuk","di","ini","sudah","saja","yang",
+"adalah","oleh","dalam"]
 
 #fungsi untuk remove stopwords
 def remove_stopwords(query):
@@ -34,6 +36,7 @@ file.close()
 pertanyaan_asli = pertanyaan_asli.split('\n')
 pertanyaan_modif = pertanyaan_modif.split('\n')
 
+
 #Daftar pertanyaan dirubah semua ke huruf kecil
 for i in range(len(pertanyaan_asli)-1):
     pertanyaan_modif[i] = pertanyaan_asli[i].lower()
@@ -42,9 +45,9 @@ for i in range(len(pertanyaan_asli)-1):
 
 #ini function buat pakai regex
 def metode_regex(query):
-    query = query.split(' ')
+    query_sudah_displit = query.split(' ')
     #Kalau kata pertama nya stopwords bakal hilang jadi char pertama ga boleh ^
-    if (query[0] in stopwords):
+    if (query_sudah_displit[0] in stopwords):
         hasil = ""
     else :
         hasil = "^"
@@ -68,12 +71,13 @@ def metode_regex(query):
             t[i] = pengganti
         i+=1
     hasil = ''.join(t)
-    # print(hasil)
+    
     #Cari di list pertanyaan ada ga
-    for i in range(23):
+    for i in range(len(pertanyaan_asli)):
         x = re.search(hasil, pertanyaan_asli[i])
         if (x):
             jsonpass = jawaban[i]
+            # print(jawaban[i])
             break
     return json.dumps(jsonpass)
 
@@ -126,6 +130,6 @@ def kmp(query,text) :
         print(percent)
     return percent
 
-metode_kmp("what is python?")
+# metode_kmp("what is python?")
 # print(kmp("what is python?",pertanyaan_modif[0]))
-# print (metode_regex(first))
+#metode_regex(first)
