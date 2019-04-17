@@ -106,4 +106,4 @@ def bm(query,text):
     
     return percent
 
-metode_bm(first)
+print(metode_bm(first))

@@ -79,4 +79,4 @@ def metode_regex(query):
             break
     return json.dumps(jsonpass)
 
-metode_regex(first)
+print (metode_regex(first))

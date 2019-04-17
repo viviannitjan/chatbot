@@ -108,4 +108,4 @@ def kmp(query,text) :
         # print(percent)
     return percent
 
-metode_kmp(first)
+print(metode_kmp(first))
