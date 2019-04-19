@@ -41,6 +41,17 @@ for i in range(len(pertanyaan_asli)-1):
     query_word = remove_stopwords(pertanyaan_modif[i])
     pertanyaan_modif[i] = " ".join(query_word)
 
+def search_same(query,text,i):
+    count = 0
+    j=len(query)-1
+    # print(text)
+    while(j>=0 and i<len(text)):
+        # print(i,j)
+        if(query[j]==text[i]):
+            count+=1
+        j-=1
+        i-=1
+    return count/len(query)
 
 def metode_bm(query):
     #menghasilkan jawaban
@@ -86,6 +97,7 @@ def bm(query,text):
     #search with booye moore algorithm
     i = inp_len-1
     j = inp_len-1
+    percent_j=0
     while (j<=txt_len-1):
         if(inp[i]==text[j]):
             #if same
@@ -103,7 +115,10 @@ def bm(query,text):
                 last = last_occ[text[j]]
             j=j+inp_len-min(i,1+last)
             i=inp_len-1
+            percent_j=search_same(inp,text,j)
     
     return percent
 
 print(metode_bm(first))
+print(bm("aku anak keren","aku yang keren"))
+print(search_same("aku anak keren","aku yang keren",13))

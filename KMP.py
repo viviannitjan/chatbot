@@ -1,4 +1,6 @@
 import string
+import nltk
+from nltk.corpus import wordnet
 from sys import argv
 script, first = argv
 import json
@@ -6,6 +8,15 @@ import json
 stopwords = ["is","an","the","on","of","was","in","for","does","do","'ve",
 "a","or","to","and","any","are","been","untuk","di","ini","sudah","saja","yang",
 "adalah","oleh","dalam"]
+
+#get synonyms of words
+def get_synonyms(word):
+    synonyms=[]
+    for syn in wordnet.synsets(word):
+        for l in syn.lemmas():
+            synonyms.append(l.name())
+    return set(synonyms)
+
 
 #fungsi untuk remove stopwords
 def remove_stopwords(query):
@@ -52,7 +63,7 @@ def metode_kmp(query):
     if (percentage[0][1]>=0.9):
         jsonpass.append(jawaban[percentage[0][0]])
         # print(jawaban[percentage[0][0]])
-    else:
+    elif (percentage[0][1]>=0.3):
         # print("Apakah yang anda maksud: ")
         # print(pertanyaan_asli[percentage[0][0]])
         # print(pertanyaan_asli[percentage[1][0]])
@@ -61,7 +72,18 @@ def metode_kmp(query):
         jsonpass.append(pertanyaan_asli[percentage[0][0]])
         jsonpass.append(pertanyaan_asli[percentage[1][0]])
         jsonpass.append(pertanyaan_asli[percentage[2][0]])
+    else :
+        jsonpass.append("Sepertinya anda salah bertanya, coba lagi dengan pertanyaan lain")
     return json.dumps(jsonpass)
+
+def search_same(query,text,i):
+    count = 0
+    j=0
+    while (i+j<len(text)) and (j<len(query)):
+        if(query[j]==text[i+j]):
+            count+=1
+        j+=1
+    return count/len(query)
 
 def kmp(query,text) :
     #seaching with kmp algo
@@ -93,6 +115,7 @@ def kmp(query,text) :
     #kmp algo
     i=0
     j=0
+    percent_j=search_same(inp,text,0)
     while (i<txt_len):
         if(inp[j]==text[i]):
             if(j==inp_len-1):
@@ -100,12 +123,16 @@ def kmp(query,text) :
             i+=1
             j+=1
         elif (j>0): 
-            percent = max(percent,j/(txt_len-1))
+            percent = max(percent,percent_j)
             j=longest[j-1]
+            percent_j = search_same(inp,text,j)
         else:
-            percent = max(percent,j/(txt_len-1))
+            percent = max(percent,percent_j)
             i+=1
+            percent_j = search_same(inp,text,j)
         # print(percent)
     return percent
 
 print(metode_kmp(first))
+# print(kmp(first,pertanyaan_modif[0]))
+print(get_synonyms("active"))
