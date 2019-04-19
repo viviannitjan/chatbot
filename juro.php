@@ -1,7 +1,8 @@
 <?php
-	if(!isset($_POST['question'])){
-		$aResult = 'tidak ada angka terinput';
-		echo json_encode($aResult);
+	if(!isset($_POST['question']) || $_POST['question']==''){
+		$temp = [];
+		array_push($temp,"pertanyaan belum diisi");
+		echo json_encode($temp);
 	}
 	elseif (!isset($_POST['method'])){
 		echo json_encode('Tidak ada method terpilih');

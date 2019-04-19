@@ -1,16 +1,21 @@
+html{
+	background: url(background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 .avatar {
     position: relative;
     top : 100px;
     width: 75%;
     margin: auto;
 }
-
 .avatar img {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
-
 .Pertanyaan {
     position: relative;
     top : 150px;
@@ -32,6 +37,10 @@
 }
 
 .Jawaban {
+	background : url(paragraph.jpg) no-repeat center center fixed; 
+	background-size : cover;
+	border-style : groove;
+	visibility : hidden;
     position: relative;
     top : 200px;
     width: 55%;

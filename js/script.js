@@ -8,6 +8,9 @@ $(document).ready(function() {
 				data : {question : $("#terima_pertanyaan").val(), method : 'regex'},
 				success : function(data){
 					$("#tampil_jawaban").html(data);
+					var stylechange = 
+						document.getElementsByClassName("Jawaban");
+					stylechange[0].style.visibility = "visible";
 				},
 				error : function(){$("#tampil_jawaban").html("error occured in the engine or server");},
 				cache : false
@@ -27,7 +30,10 @@ $(document).ready(function() {
 				success : function(data){
 					//$("#tampil_jawaban").html(data);
 					if (data.length==1){
-						$("#tampil_jawaban").html(data.length);
+						$("#tampil_jawaban").html(data);
+						var stylechange = 
+						document.getElementsByClassName("Jawaban");
+						stylechange[0].style.visibility = "visible";
 					}
 					else {
 						var string = [];
@@ -41,6 +47,9 @@ $(document).ready(function() {
 						}
 						string.push("</ul>");
 						$("#tampil_jawaban").html(string.join(""))
+						var stylechange = 
+						document.getElementsByClassName("Jawaban");
+						stylechange[0].style.visibility = "visible";
 					}
 				},
 				error : function(){$("#tampil_jawaban").html("error occured in the engine or server");},
@@ -61,7 +70,10 @@ $(document).ready(function() {
 				success : function(data){
 					//$("#tampil_jawaban").html(data);
 					if (data.length==1){
-						$("#tampil_jawaban").html(data.length);
+						$("#tampil_jawaban").html(data);
+						var stylechange = 
+						document.getElementsByClassName("Jawaban");
+						stylechange[0].style.visibility = "visible";
 					}
 					else {
 						var string = [];
@@ -75,6 +87,9 @@ $(document).ready(function() {
 						}
 						string.push("</ul>");
 						$("#tampil_jawaban").html(string.join(""))
+						var stylechange = 
+						document.getElementsByClassName("Jawaban");
+						stylechange[0].style.visibility = "visible";
 					}
 				},
 				error : function(){$("#tampil_jawaban").html("error occured in the engine or server");},
