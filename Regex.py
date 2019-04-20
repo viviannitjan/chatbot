@@ -5,10 +5,7 @@ from nltk.corpus import wordnet
 from sys import argv
 script, first = argv
 
-stopwords = [" ","is","an","the","on","of","was","in","for","does","do","'ve",
-"a","or","to","and","any","are","been","untuk","di","ini","sudah","saja","yang",
-"adalah","oleh","dalam"]
-# stopwords = set(stopwords.words('english'))
+stopwords = set(stopwords.words('indonesian'))
 
 #fungsi untuk remove stopwords
 def remove_stopwords(query):
@@ -51,16 +48,14 @@ def cari_synonim(query):
     query_displit = query.split(' ')
     for i in range(len(query_displit)):
         sinonim_kata_ke_i = []
-        for syn in wordnet.synsets(query_displit[i]):
-            for l in syn.lemmas():
+        for syn in wordnet.synsets(query_displit[i],lang="ind"):
+            for l in syn.lemmas(lang="ind"):
                 sinonim_kata_ke_i.append(l.name())
         sinonim_kata_ke_i = list(set(sinonim_kata_ke_i))
 
         for j in range(len(sinonim_kata_ke_i)):
             copy_query = query
             copy_query = copy_query.replace(query_displit[i],sinonim_kata_ke_i[j])
-            # print(query_displit[i], sinonim_kata_ke_i[j])
-            # print(copy_query)
             sinonim_query.append(copy_query)
     return sinonim_query
 
@@ -102,9 +97,9 @@ def metode_regex(query):
         x = re.search(hasil, pertanyaan_asli[i])
         if (x):
             jsonpass.append(jawaban[i])
-            # print(jawaban[i])
+            print(jawaban[i])
             break
-    return json.dumps(jsonpass)
+    # return json.dumps(jsonpass)
 
 i = 0
 daftar_pertanyaan = cari_synonim(first)

@@ -1,26 +1,26 @@
-What is Python?
-What is the Python Software Foundation?
-Are there copyright restrictions on the use of Python?
-Why was Python created in the first place?
-What is Python good for?
-How does the Python version numbering scheme work?
-How do I obtain a copy of the Python source?
-How do I get documentation on Python?
-I've never programmed before. Is there a Python tutorial?
-Is there a newsgroup or mailing list devoted to Python?
-How do I get a beta test version of Python?
-How do I submit bug reports and patches for Python?
-Are there any published articles about Python that I can reference?
-Are there any books on Python?
-Where in the world is www.python.org located?
-Why is it called Python?
-Do I have to like “Monty Python’s Flying Circus”?
-How stable is Python?
-How many people are using Python?
-Have any significant projects been done in Python?
-What new developments are expected for Python in the future?
-Is it reasonable to propose incompatible changes to Python?
-Is Python a good language for beginning programmers? 
+Apa itu Python?
+Apa itu Yayasan Perangkat Lunak Python?
+Apakah ada batasan hak cipta untuk penggunaan Python?
+Mengapa Python dibuat di tempat pertama?
+Apa gunanya Python?
+Bagaimana cara kerja skema penomoran versi Python?
+Bagaimana cara mendapatkan salinan sumber Python?
+Bagaimana saya mendapatkan dokumentasi tentang Python?
+Saya belum pernah diprogram sebelumnya. Apakah ada tutorial Python?
+Apakah ada newsgroup atau mailing list yang dikhususkan untuk Python?
+Bagaimana cara saya mendapatkan versi beta Python?
+Bagaimana cara mengirim laporan bug dan tambalan untuk Python?
+Apakah ada artikel yang dipublikasikan ten	tang Python yang dapat saya rujuk?
+Apakah ada buku tentang Python?
+Di mana di dunia www.python.org berada?
+Mengapa disebut Python?
+Apakah saya harus menyukai "Sirkus Terbang Monty Python"?
+Seberapa stabilkah Python?
+Berapa banyak orang yang menggunakan Python?
+Apakah ada proyek signifikan yang dilakukan dengan Python?
+Perkembangan baru apa yang diharapkan untuk Python di masa depan?
+Apakah masuk akal untuk mengusulkan perubahan yang tidak kompatibel ke Python?
+Apakah Python adalah bahasa yang baik untuk pemrogram pemula?
 Siapa nama koordinator dosen mata kuliah strategi algoritma 2018/2019?
 Siapa nama koordas strategi algoritma?
 Berapa jumlah SKS minimal untuk lulus S1 di ITB?
