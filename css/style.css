@@ -7,20 +7,21 @@ html{
 }
 .avatar {
     position: relative;
-    top : 100px;
+    top : 20px;
     width: 75%;
+	height : 125px;
     margin: auto;
 }
 .avatar img {
+	height : 125px;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 .Pertanyaan {
     position: relative;
-    top : 150px;
-    width: 75%;
-    margin: auto;
+    width: 95%;
+    margin: 10px auto;
 }
 
 .Pertanyaan #terima_pertanyaan {
@@ -35,20 +36,67 @@ html{
     width: 150px;
     margin: auto;
 }
-
-.Jawaban {
-	background : url(paragraph.jpg) no-repeat center center fixed; 
+.chatbox{
+	background : url(chatboxbg.jpg) no-repeat center center fixed; 
 	background-size : cover;
-	border-style : groove;
-	visibility : hidden;
-    position: relative;
-    top : 200px;
-    width: 55%;
-    margin: auto;
+	display : block;
+	position : relative;
+	width : 500px;
+	height : 600px;
+	margin : 50px auto;
+	border-radius : 10px;
 }
 
-.Jawaban p {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.chatlog{
+	background : url(paragraph.jpg) no-repeat center center fixed;
+	background-size : cover;
+	display : block;
+	position : relative;
+	overflow-x : hidden;
+	overflow-y : scroll;
+	margin : 10px auto;
+	width : 95%;
+	height : 375px;
+}
+.chatlog::-webkit-scrollbar{
+	width: 10px;
+}
+.chatlog::-webkit-scrollbar-thumb{
+	border-radius : 5px;
+	background:rgba(0,0,0,.1);
+}
+
+.chat{
+	display : flex;
+	flex-direction : column;
+	align-items:flex-start;
+	margin: 10px 10px 10px 10px;
+}
+.chat .nama{
+	margin : 10px 0px 0px 12px;
+	font-size : 12px;
+	font-family : tahoma, sans-serif;
+}
+.self .nama{
+	margin-left: auto;
+	margin-right : 12px;
+}
+.chat .chat-message{
+	padding : 15px;
+	width : 80%;
+	background : #1ddced;
+	margin : 0px 0px 0px 0px;
+	border-radius : 20px;
+	word-wrap : break-word;
+	font-size : 15px;
+	font-family : tahoma, sans-serif;
+	color : #fff;
+}
+.self .chat-message{
+	margin-left : auto;
+	background : #30a2fe;
+}
+.chatbot .chat-message{
+	
+	background : #1adda4;
 }
