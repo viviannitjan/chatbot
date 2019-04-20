@@ -104,14 +104,10 @@ def metode_regex(query):
             print(jawaban[i])
             break
     # return json.dumps(jsonpass)
-
-<<<<<<< HEAD
+    
 daftar_pertanyaan = cari_synonim(first)
 daftar_pertanyaan.append(first)
 # print(daftar_pertanyaan)
 while (i < len(daftar_pertanyaan) and len(jsonpass) == 0):
     metode_regex(daftar_pertanyaan[i])
     i += 1
-=======
-print (metode_regex(first))
->>>>>>> f07cb4c1ed0189076b96e74f21b1cbc605786a99
