@@ -1,4 +1,6 @@
 import string
+import nltk
+from nltk.corpus import wordnet
 from sys import argv
 script, first = argv
 import json
@@ -6,6 +8,24 @@ import json
 stopwords = ["is","an","the","on","of","was","in","for","does","do","'ve",
 "a","or","to","and","any","are","been","untuk","di","ini","sudah","saja","yang",
 "adalah","oleh","dalam"]
+
+def cari_synonim(query):
+    sinonim_query = []
+    query_displit = query.split(' ')
+    for i in range(len(query_displit)):
+        sinonim_kata_ke_i = []
+        for syn in wordnet.synsets(query_displit[i]):
+            for l in syn.lemmas():
+                sinonim_kata_ke_i.append(l.name())
+        sinonim_kata_ke_i = list(set(sinonim_kata_ke_i))
+
+        for j in range(len(sinonim_kata_ke_i)):
+            copy_query = query
+            copy_query = copy_query.replace(query_displit[i],sinonim_kata_ke_i[j])
+            # print(query_displit[i], sinonim_kata_ke_i[j])
+            # print(copy_query)
+            sinonim_query.append(copy_query)
+    return sinonim_query
 
 #fungsi untuk remove stopwords
 def remove_stopwords(query):
@@ -55,17 +75,22 @@ def search_same(query,text,i):
 
 def metode_bm(query):
     #menghasilkan jawaban
-    percentage = {}
-    for i in range (len(pertanyaan_modif)):
-        percentage[i] = bm(query,pertanyaan_modif[i])
-    
-    #sorting value of percentage
-    percentage = sorted(percentage.items(), key=lambda item: item[1], reverse=True)
+    percent=[(0,0), (1,0)]
+    # print()
+    for j in range(0, len(query)):
+        percentage = {}
+        for i in range (len(pertanyaan_modif)):
+            percentage[i] = bm(query[j],pertanyaan_modif[i])                                                            
+        #sorting value of percentage
+        percentage = sorted(percentage.items(), key=lambda item: item[1], reverse=True)
+        if(percent[0][1]<percentage[0][1]):
+            percent=percentage
+    # print(percent)
     jsonpass = []
 
-    if (percentage[0][1]>=0.9):
+    if (percent[0][1]>=0.9):
         # print(jawaban[percentage[0][0]])
-        jsonpass.append(jawaban[percentage[0][0]])
+        jsonpass.append(jawaban[percent[0][0]])
     else:
     #     print("Apakah yang anda maksud: ")
     #     print(pertanyaan_asli[percentage[0][0]])
@@ -73,9 +98,9 @@ def metode_bm(query):
     #     print(pertanyaan_asli[percentage[2][0]])
 
         jsonpass.append("Apakah yang anda maksud: ")
-        jsonpass.append(pertanyaan_asli[percentage[0][0]])
-        jsonpass.append(pertanyaan_asli[percentage[1][0]])
-        jsonpass.append(pertanyaan_asli[percentage[2][0]])
+        jsonpass.append(pertanyaan_asli[percent[0][0]])
+        jsonpass.append(pertanyaan_asli[percent[1][0]])
+        jsonpass.append(pertanyaan_asli[percent[2][0]])
     return json.dumps(jsonpass)
 
 def bm(query,text):
@@ -97,7 +122,7 @@ def bm(query,text):
     #search with booye moore algorithm
     i = inp_len-1
     j = inp_len-1
-    percent_j=0
+    percent_j=search_same(inp,text,j)
     while (j<=txt_len-1):
         if(inp[i]==text[j]):
             #if same
@@ -108,7 +133,7 @@ def bm(query,text):
                 j-=1
         else:
             #not same
-            percent = max(percent,(inp_len-1-i)/(txt_len-1))
+            percent = max(percent,percent_j)
             if (text[j] not in last_occ.keys()):
                 last=-1
             else:
@@ -119,6 +144,9 @@ def bm(query,text):
     
     return percent
 
-print(metode_bm(first))
-print(bm("aku anak keren","aku yang keren"))
-print(search_same("aku anak keren","aku yang keren",13))
+daftar_pertanyaan = cari_synonim(first)
+daftar_pertanyaan.append(first)
+print(daftar_pertanyaan)
+print(metode_bm(daftar_pertanyaan))
+# print(bm("aku keren","yang aku keren"))
+# print(search_same("aku anak keren","aku yang keren",13))
