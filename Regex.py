@@ -97,9 +97,9 @@ def metode_regex(query):
         x = re.search(hasil, pertanyaan_asli[i])
         if (x):
             jsonpass.append(jawaban[i])
-            print(jawaban[i])
+            # print(jawaban[i])
             break
-    # return json.dumps(jsonpass)
+    return json.dumps(jsonpass)
 
 i = 0
 daftar_pertanyaan = cari_synonim(first)
