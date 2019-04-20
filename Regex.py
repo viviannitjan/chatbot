@@ -1,11 +1,14 @@
 import re
 import json
+from nltk.corpus import stopwords
+from nltk.corpus import wordnet
 from sys import argv
 script, first = argv
 
-stopwords = ["is","an","the","on","of","was","in","for","does","do","'ve",
+stopwords = [" ","is","an","the","on","of","was","in","for","does","do","'ve",
 "a","or","to","and","any","are","been","untuk","di","ini","sudah","saja","yang",
 "adalah","oleh","dalam"]
+# stopwords = set(stopwords.words('english'))
 
 #fungsi untuk remove stopwords
 def remove_stopwords(query):
@@ -42,8 +45,32 @@ for i in range(len(pertanyaan_asli)-1):
     query_word = remove_stopwords(pertanyaan_modif[i])
     pertanyaan_modif[i] = " ".join(query_word)
 
+def cari_synonim(query):
+    sinonim_query = []
+    sinonim_query.append(query)
+    query_displit = query.split(' ')
+    for i in range(len(query_displit)):
+        sinonim_kata_ke_i = []
+        for syn in wordnet.synsets(query_displit[i]):
+            for l in syn.lemmas():
+                sinonim_kata_ke_i.append(l.name())
+        sinonim_kata_ke_i = list(set(sinonim_kata_ke_i))
+
+        for j in range(len(sinonim_kata_ke_i)):
+            copy_query = query
+            copy_query = copy_query.replace(query_displit[i],sinonim_kata_ke_i[j])
+            # print(query_displit[i], sinonim_kata_ke_i[j])
+            # print(copy_query)
+            sinonim_query.append(copy_query)
+    return sinonim_query
+
+
+global jsonpass
+jsonpass = []
 #ini function buat pakai regex
 def metode_regex(query):
+    global jsonpass
+    jsonpass = []
     query_sudah_displit = query.split(' ')
     #Kalau kata pertama nya stopwords bakal hilang jadi char pertama ga boleh ^
     if (query_sudah_displit[0] in stopwords):
@@ -70,13 +97,18 @@ def metode_regex(query):
             t[i] = pengganti
         i+=1
     hasil = ''.join(t)
-
     #Cari di list pertanyaan ada ga
     for i in range(len(pertanyaan_asli)):
         x = re.search(hasil, pertanyaan_asli[i])
         if (x):
-            jsonpass = jawaban[i]
+            jsonpass.append(jawaban[i])
+            # print(jawaban[i])
             break
     return json.dumps(jsonpass)
 
-print (metode_regex(first))
+i = 0
+daftar_pertanyaan = cari_synonim(first)
+# print(daftar_pertanyaan)
+while (i < len(daftar_pertanyaan) and len(jsonpass) == 0):
+    metode_regex(daftar_pertanyaan[i])
+    i += 1
