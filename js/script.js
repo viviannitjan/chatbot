@@ -24,6 +24,9 @@ $(document).ready(function() {
 		divself.appendChild(paragraph);
 		var stylechange = document.getElementsByClassName("chatlog");
 		stylechange[0].appendChild(divself);
+		stylechange = document.getElementsByClassName("chatlog");
+		stylechange[0].scrollTop = stylechange[0].scrollHeight;
+		stylechange = document.getElementsByClassName("chatlog");
 		$.ajax({
 				type : "POST",
 				url : "juro.php",
@@ -75,6 +78,9 @@ $(document).ready(function() {
 		divself.appendChild(paragraph);
 		var stylechange = document.getElementsByClassName("chatlog");
 		stylechange[0].appendChild(divself);
+		stylechange = document.getElementsByClassName("chatlog");
+		stylechange[0].scrollTop = stylechange[0].scrollHeight;
+		stylechange = document.getElementsByClassName("chatlog");
 		$.ajax({
 				type : "POST",
 				url : "juro.php",
@@ -145,6 +151,9 @@ $(document).ready(function() {
 		divself.appendChild(paragraph);
 		var stylechange = document.getElementsByClassName("chatlog");
 		stylechange[0].appendChild(divself);
+		stylechange = document.getElementsByClassName("chatlog");
+		stylechange[0].scrollTop = stylechange[0].scrollHeight;
+		stylechange = document.getElementsByClassName("chatlog");
 		$.ajax({
 				type : "POST",
 				url : "juro.php",

@@ -105,5 +105,6 @@ i = 0
 daftar_pertanyaan = cari_synonim(first)
 # print(daftar_pertanyaan)
 while (i < len(daftar_pertanyaan) and len(jsonpass) == 0):
-    metode_regex(daftar_pertanyaan[i])
+    readyprint = metode_regex(daftar_pertanyaan[i])
     i += 1
+print(readyprint)
