@@ -1,29 +1,28 @@
 import string
 import nltk
 from nltk.corpus import wordnet
+from nltk.corpus import stopwords
 from sys import argv
 script, first = argv
 import json
 
-stopwords = ["is","an","the","on","of","was","in","for","does","do","'ve",
-"a","or","to","and","any","are","been","untuk","di","ini","sudah","saja","yang",
-"adalah","oleh","dalam"]
+stopwords = set(stopwords.words('indonesian'))
 
+#untuk mencari sinonim dari sebuah kata
 def cari_synonim(query):
     sinonim_query = []
+    sinonim_query.append(query)
     query_displit = query.split(' ')
     for i in range(len(query_displit)):
         sinonim_kata_ke_i = []
-        for syn in wordnet.synsets(query_displit[i]):
-            for l in syn.lemmas():
+        for syn in wordnet.synsets(query_displit[i],lang="ind"):
+            for l in syn.lemmas(lang="ind"):
                 sinonim_kata_ke_i.append(l.name())
         sinonim_kata_ke_i = list(set(sinonim_kata_ke_i))
 
         for j in range(len(sinonim_kata_ke_i)):
             copy_query = query
             copy_query = copy_query.replace(query_displit[i],sinonim_kata_ke_i[j])
-            # print(query_displit[i], sinonim_kata_ke_i[j])
-            # print(copy_query)
             sinonim_query.append(copy_query)
     return sinonim_query
 
@@ -50,7 +49,7 @@ jawaban = jawaban.split('~')
 #import file pertanyaan
 file = open('pertanyaan.txt','r',encoding="utf8")
 pertanyaan_asli = file.read()
-pertanyaan_modif = pertanyaan_asli
+pertanyaan_modif = pertanyaan_asli[:]
 file.close()
 pertanyaan_asli = pertanyaan_asli.split('\n')
 pertanyaan_modif = pertanyaan_modif.split('\n')
@@ -62,6 +61,7 @@ for i in range(len(pertanyaan_asli)-1):
     pertanyaan_modif[i] = " ".join(query_word)
 
 def search_same(query,text,i):
+    panjang = max(len(query),len(text))
     count = 0
     j=len(query)-1
     # print(text)
@@ -71,7 +71,7 @@ def search_same(query,text,i):
             count+=1
         j-=1
         i-=1
-    return count/len(query)
+    return count/panjang
 
 def metode_bm(query):
     #menghasilkan jawaban
@@ -85,22 +85,18 @@ def metode_bm(query):
         percentage = sorted(percentage.items(), key=lambda item: item[1], reverse=True)
         if(percent[0][1]<percentage[0][1]):
             percent=percentage
-    # print(percent)
     jsonpass = []
 
     if (percent[0][1]>=0.9):
-        # print(jawaban[percentage[0][0]])
         jsonpass.append(jawaban[percent[0][0]])
-    else:
-    #     print("Apakah yang anda maksud: ")
-    #     print(pertanyaan_asli[percentage[0][0]])
-    #     print(pertanyaan_asli[percentage[1][0]])
-    #     print(pertanyaan_asli[percentage[2][0]])
-
-        jsonpass.append("Apakah yang anda maksud: ")
+    elif (percent[0][1]>=0.3):
+        jsonpass.append("Apakah yang Anda maksud : ")
         jsonpass.append(pertanyaan_asli[percent[0][0]])
         jsonpass.append(pertanyaan_asli[percent[1][0]])
         jsonpass.append(pertanyaan_asli[percent[2][0]])
+    else :
+        jsonpass.append("Sepertinya pertanyaan anda salah, coba lagi dengan pertanyaan lain")
+    return json.dumps(jsonpass)
     return json.dumps(jsonpass)
 
 def bm(query,text):
@@ -145,8 +141,6 @@ def bm(query,text):
     return percent
 
 daftar_pertanyaan = cari_synonim(first)
-daftar_pertanyaan.append(first)
-print(daftar_pertanyaan)
 print(metode_bm(daftar_pertanyaan))
 # print(bm("aku keren","yang aku keren"))
 # print(search_same("aku anak keren","aku yang keren",13))

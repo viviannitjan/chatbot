@@ -86,7 +86,7 @@ Sistem Komunikasi Satelit Domestik
 ~
 louviju
 ~
-????
+HTML, CSS, JavaScript, PHP, Python
 ~
 DKI Jakarta
 ~
@@ -109,4 +109,3 @@ Tujuh orang
 Jl. Pegangsaan Timur No 56
 ~
 Kantin Borju
-
