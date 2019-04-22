@@ -109,6 +109,9 @@ def bm(query,text):
     inp_len = len(inp)
     txt_len = len(text)
 
+    if inp_len==0:
+        return 0
+
     #to save last occurence
     last_occ = dict((k,-1) for k in string.ascii_lowercase)
     

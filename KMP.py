@@ -103,6 +103,9 @@ def kmp(query,text) :
     txt_len = len(text)
     percent = 0
 
+    if inp_len==0:
+        return 0
+
     #search for longest prefix that is also suffix
     longest = [0]
     i=0
